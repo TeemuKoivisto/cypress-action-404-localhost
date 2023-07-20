@@ -4,7 +4,11 @@ description: Build & run unit and Cypress tests
 runs:
   using: composite
   steps:
-    - name: Run tests with Cypress
+    - name: Run Cypress manually
+      shell: bash
+      run: node run.js
+
+    - name: Run tests with Cypress action
       id: cypress
       uses: cypress-io/github-action@v5
       with:
@@ -13,7 +17,7 @@ runs:
         command: pnpm --filter site cy run --config baseUrl=http://localhost:5285
         install: false
         quiet: false
-        start: pnpm --filter site dev
+        start: pnpm --filter site dev --host
         wait-on: http://localhost:5285
         working-directory: ./packages/site
 

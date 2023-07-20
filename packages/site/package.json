@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev2": "vite",
+    "dev": "svelte-kit sync && vite",
     "build": "vite build",
     "preview": "vite preview",
     "test": "cypress run --browser=chrome --config baseUrl=http://localhost:5285",
