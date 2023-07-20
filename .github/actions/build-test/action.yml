@@ -1,0 +1,34 @@
+name: build-test
+description: Build & run unit and Cypress tests
+
+runs:
+  using: composite
+  steps:
+    - name: Run tests with Cypress
+      id: cypress
+      uses: cypress-io/github-action@v5
+      with:
+        browser: chrome
+        cache-key: ${{ runner.os }}-node-${{ matrix.node-version }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+        command: pnpm --filter site cy run --config baseUrl=http://localhost:5285
+        install: false
+        quiet: false
+        start: pnpm --filter site dev
+        wait-on: http://localhost:5285
+        working-directory: ./packages/site
+
+    - name: Export screenshots (on failure only)
+      uses: actions/upload-artifact@v3
+      if: failure()
+      with:
+        name: cypress-screenshots
+        path: ./packages/site/cypress/screenshots
+        retention-days: 7
+
+    - name: Export screen recordings (on failure only)
+      uses: actions/upload-artifact@v3
+      if: failure()
+      with:
+        name: cypress-videos
+        path: ./packages/site/cypress/videos
+        retention-days: 7
