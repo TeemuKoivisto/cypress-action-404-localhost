@@ -4,9 +4,9 @@ description: Build & run unit and Cypress tests
 runs:
   using: composite
   steps:
-    - name: Run Cypress manually
-      shell: bash
-      run: node run.js
+    # - name: Run Cypress manually
+    #   shell: bash
+    #   run: node run.js
 
     - name: Run tests with Cypress action
       id: cypress
