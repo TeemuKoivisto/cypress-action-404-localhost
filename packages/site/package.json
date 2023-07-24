@@ -12,6 +12,7 @@
     "cy": "cypress"
   },
   "devDependencies": {
+    "@frsource/cypress-plugin-visual-regression-diff": "^3.3.10",
     "@sveltejs/adapter-static": "^2.0.2",
     "@sveltejs/kit": "1.22.3",
     "cypress": "12.17.1",
